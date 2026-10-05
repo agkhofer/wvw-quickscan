@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Werk van Waarde — Quick Scan Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/shell.css">
+<link rel="stylesheet" href="css/dashboard-common.css">
+<link rel="stylesheet" href="css/employee-dashboard.css">
+<link rel="stylesheet" href="css/employer-dashboard.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">Werk van Waarde <em>· Quick Scan</em></div>
+  <div class="topbar-sub">Universiteit Groningen — voor bedrijfsadviseurs</div>
+</div>
+
+<div class="shell">
+
+  <!-- STEP: SCAN TYPE -->
+  <div class="step active" id="step-type">
+    <div class="step-title">Welke scan wil je verwerken?</div>
+    <div class="step-sub">Kies het type Excel-export dat je vanuit Qualtrics hebt gedownload.</div>
+    <div class="type-grid">
+      <button class="type-card" data-type="employee">
+        <div class="type-icon">🧑‍💼</div>
+        <div class="type-name">Medewerkersscan</div>
+        <div class="type-desc">Export van de Medewerkerscan — individuele werkbeleving per medewerker.</div>
+      </button>
+      <button class="type-card" data-type="employer">
+        <div class="type-icon">🏢</div>
+        <div class="type-name">Werkgeversscan</div>
+        <div class="type-desc">Export van de Werkgeverscan — inschatting en organisatiecontext door werkgevers.</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP: UPLOAD -->
+  <div class="step" id="step-upload">
+    <div class="step-title" id="upload-title">Upload het bestand</div>
+    <div class="step-sub" id="upload-sub"></div>
+
+    <div class="dropzone" id="dropzone">
+      <div class="dz-icon">📊</div>
+      <div class="dz-main">Sleep het bestand hierheen</div>
+      <div class="dz-sub">of klik om te bladeren (.xlsx)</div>
+      <input type="file" id="file-input" accept=".xlsx">
+    </div>
+
+    <div class="file-chip" id="file-chip" style="display:none;">
+      <span>📄</span>
+      <span class="fc-name" id="fc-name"></span>
+      <button class="fc-remove" id="fc-remove">verwijderen</button>
+    </div>
+
+    <div class="hint-box">
+      Download de export als .xlsx via Qualtrics → Data &amp; Analysis → Export &amp; Import → Export Data → CSV/XLSX.
+      Gegevens worden alleen lokaal in je browser verwerkt en nergens geüpload.
+    </div>
+
+    <div class="msg msg-error" id="upload-error"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" data-back="type">← Ander scantype</button>
+      <button class="btn btn-primary" id="upload-continue" disabled>Verder →</button>
+    </div>
+  </div>
+
+  <!-- STEP: ORG CODE -->
+  <div class="step" id="step-code">
+    <div class="step-title">Vul de organisatiecode in</div>
+    <div class="step-sub">Vul de unieke code in die bij deze organisatie hoort. Alleen de respondenten met deze code worden getoond.</div>
+
+    <div class="field">
+      <label for="code-input">Organisatiecode</label>
+      <input type="text" id="code-input" placeholder="bijv. DEMO">
+      <div class="field-hint" id="code-error" style="color:#8a2a10;"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" data-back="upload">← Ander bestand</button>
+      <button class="btn btn-primary" id="code-submit">Resultaten laden →</button>
+    </div>
+  </div>
+
+  <!-- STEP: DASHBOARD -->
+  <div class="step" id="step-dashboard" style="max-width:none;">
+  </div>
+
+</div>
+
+<!-- Dashboard is rendered outside the constrained .shell so it can use its own full-width layout -->
+<div id="dashboard-shell" style="display:none;">
+  <div class="dash-toolbar">
+    <div style="display:flex;gap:0.6rem;">
+      <button class="btn btn-outline" id="new-code-btn">← Andere code</button>
+      <button class="btn btn-outline" id="new-file-btn">Nieuw bestand</button>
+    </div>
+    <button class="btn btn-primary" id="pdf-btn">⬇ Download PDF</button>
+  </div>
+
+  <div class="shell" style="max-width:900px; padding-top:0.75rem;" id="compare-box">
+    <div class="hint-box" style="border-left-color: var(--wvw-purple);">
+      <strong>Vergelijking met medewerkersscan</strong> — upload optioneel ook de Medewerkerscan-export voor dezelfde
+      bedrijfscode om het vergelijkingsdeel (werkgever vs. medewerker) te tonen.
+      <div style="margin-top:0.6rem;">
+        <label class="btn btn-outline" style="cursor:pointer;">
+          Medewerkersscan uploaden
+          <input type="file" id="compare-file-input" accept=".xlsx" style="display:none;">
+        </label>
+        <span id="compare-status" style="margin-left:0.6rem; font-size:0.8rem; color:var(--wvw-muted);"></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="dashboard-container"></div>
+</div>
+
+<footer class="shell-footer">Werk van Waarde — Universiteit Groningen &nbsp;·&nbsp; Alle gegevens worden lokaal in je browser verwerkt, nooit geüpload naar een server.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/constructs.js"></script>
+<script src="js/parser.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/render-employee.js"></script>
+<script src="js/render-employer.js"></script>
+<script src="js/pdf-export.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

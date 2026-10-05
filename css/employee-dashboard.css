@@ -1,0 +1,78 @@
+.dash-employee {
+  --bg: #f5f2ec;
+  --surface: #fffdf8;
+  --border: #e0d9ce;
+  --track: #ebe6dc;
+  --text: #1c1a16;
+  --muted: #7a7268;
+  --accent: #c8502a;
+  --c-good: #2f7d5b;    /* past goed */
+  --c-more: #f0a020;    /* wil meer */
+  --c-less: #b42a3c;    /* wil minder */
+  --c-stay: #b9c4d6;    /* niet passend, blijft */
+  --c-leave: #1e2b4d;   /* niet passend, vertrekt */
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --r: 10px;
+
+  background: var(--bg);
+  font-family: var(--sans);
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.dash-employee .header { background: var(--text); color: #f5f2ec; padding: 2.5rem 3rem 2rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; }
+.dash-employee .header-brand { font-family: var(--serif); font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.4rem; }
+.dash-employee .header-title { font-family: var(--serif); font-size: 2.4rem; line-height: 1.1; }
+.dash-employee .header-title em { font-style: italic; color: #e8c87a; }
+.dash-employee .header-meta { text-align: right; font-size: 0.82rem; opacity: 0.6; }
+.dash-employee .header-meta strong { font-size: 1.1rem; color: #e8c87a; display: block; font-family: var(--serif); }
+
+.dash-employee .kpi-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.9rem; margin-bottom: 1rem; }
+.dash-employee .kpi-val { font-size: 2.3rem; }
+.dash-employee .kpi.k-green .kpi-val { color: var(--c-good); }
+.dash-employee .kpi.k-blue .kpi-val { color: #2a4d7a; }
+.dash-employee .kpi.k-red .kpi-val { color: var(--accent); }
+
+/* Sectie 2: vertrekrisico per construct */
+.dash-employee .leave-explain { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.9rem; }
+.dash-employee .leave-head, .dash-employee .leave-row { display: grid; grid-template-columns: 210px 1fr 165px 200px; gap: 0.9rem; align-items: center; }
+.dash-employee .leave-head { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding-bottom: 0.4rem; border-bottom: 1.5px solid var(--border); }
+.dash-employee .leave-row { padding: 6px 0; border-bottom: 1px solid var(--border); break-inside: avoid; }
+.dash-employee .leave-name { font-size: 0.82rem; }
+.dash-employee .leave-name .cat-chip { display: inline-block; margin-top: 3px; }
+.dash-employee .leave-bar { height: 18px; background: var(--track); border-radius: 4px; overflow: hidden; display: flex; }
+.dash-employee .leave-seg { height: 100%; }
+.dash-employee .leave-cell { font-size: 0.8rem; line-height: 1.25; }
+.dash-employee .leave-cell strong { font-size: 0.95rem; }
+.dash-employee .leave-cell span { display: block; font-size: 0.7rem; color: var(--muted); }
+.dash-employee .leave-none { margin-top: 0.9rem; font-size: 0.78rem; color: var(--muted); }
+
+/* Sectie 3: gewenste richting */
+.dash-employee .dir-grid { display: flex; flex-direction: column; gap: 0.5rem; }
+.dash-employee .dir-row { display: grid; grid-template-columns: 210px 1fr 130px; gap: 0.9rem; align-items: center; break-inside: avoid; }
+.dash-employee .dir-name { font-size: 0.8rem; display: flex; align-items: center; }
+.dash-employee .dir-chart { display: flex; align-items: center; height: 20px; }
+.dash-employee .dir-half { flex: 1; display: flex; }
+.dash-employee .dir-half.l { justify-content: flex-end; }
+.dash-employee .dir-center { width: 2px; background: var(--border); height: 100%; flex-shrink: 0; }
+.dash-employee .dir-bar { height: 14px; }
+.dash-employee .dir-bar.l { background: var(--c-less); border-radius: 3px 0 0 3px; }
+.dash-employee .dir-bar.r { background: var(--c-more); border-radius: 0 3px 3px 0; }
+.dash-employee .dir-count { font-size: 0.72rem; color: var(--muted); }
+.dash-employee .dir-axis { display: grid; grid-template-columns: 210px 1fr 130px; gap: 0.9rem; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; }
+.dash-employee .dir-axis .ax { display: flex; }
+.dash-employee .dir-axis .ax span { flex: 1; }
+
+.dash-employee .open-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 1.25rem; margin-bottom: 0.75rem; break-inside: avoid; }
+.dash-employee .open-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0.5rem; }
+.dash-employee .open-empty { font-style: italic; color: var(--muted); font-size: 0.85rem; }
+.dash-employee .open-item { font-size: 0.85rem; margin-bottom: 0.4rem; padding-left: 0.75rem; border-left: 2px solid var(--border); }
+
+@media (max-width: 800px) {
+  .dash-employee .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+  .dash-employee .leave-head { display: none; }
+  .dash-employee .leave-row, .dash-employee .dir-row { grid-template-columns: 1fr 1fr; }
+  .dash-employee .header { padding: 1.5rem; }
+}

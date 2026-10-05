@@ -1,0 +1,112 @@
+.dash-employer {
+  --bg: #f0f4f0;
+  --surface: #fafcfa;
+  --border: #d4ddd4;
+  --track: #dfe8df;
+  --text: #161c16;
+  --muted: #6a7a6a;
+  --accent: #2a6b3d;
+  --c-good: #2f7d5b;     /* gaat goed */
+  --c-mid: #f0a020;      /* kan beter */
+  --c-bad: #b42a3c;      /* knelpunt */
+  --c-emp: #2a6b3d;      /* werkgever in vergelijking */
+  --c-wn: #2f4fbf;       /* medewerker in vergelijking */
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --r: 10px;
+
+  background: var(--bg);
+  font-family: var(--sans);
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.dash-employer .header { background: #1c2c1c; color: #f0f4f0; padding: 2.5rem 3rem 2rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; }
+.dash-employer .header-brand { font-family: var(--serif); font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.4rem; }
+.dash-employer .header-title { font-family: var(--serif); font-size: 2.4rem; line-height: 1.1; }
+.dash-employer .header-title em { font-style: italic; color: #a8d4a0; }
+.dash-employer .header-badge { display: inline-block; background: rgba(168,212,160,0.2); border: 1px solid rgba(168,212,160,0.4); color: #a8d4a0; font-size: 0.75rem; padding: 3px 10px; border-radius: 99px; letter-spacing: 0.05em; margin-top: 0.5rem; }
+.dash-employer .header-meta { text-align: right; font-size: 0.82rem; opacity: 0.6; }
+.dash-employer .header-meta strong { font-size: 1.1rem; color: #a8d4a0; display: block; font-family: var(--serif); }
+
+.dash-employer .kpi-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.9rem; margin-bottom: 1rem; }
+.dash-employer .kpi-val { font-size: 2.2rem; }
+.dash-employer .kpi.green .kpi-val { color: var(--accent); }
+.dash-employer .kpi.amber .kpi-val { color: #c47a08; }
+.dash-employer .kpi.blue .kpi-val { color: #2a4d7a; }
+
+/* Sectie 4: vergelijking */
+.dash-employer .cmp-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 1.4rem 0 0.6rem; font-weight: 600; }
+.dash-employer .cmp-row { display: grid; grid-template-columns: 210px 1fr 160px; gap: 0.8rem; align-items: center; padding: 3px 0; break-inside: avoid; }
+.dash-employer .cmp-name { font-size: 0.8rem; display: flex; align-items: center; }
+.dash-employer .cmp-bars { display: flex; flex-direction: column; gap: 2px; }
+.dash-employer .cmp-line { display: flex; align-items: center; gap: 6px; height: 12px; }
+.dash-employer .cmp-fill { height: 12px; border-radius: 2px; min-width: 2px; }
+.dash-employer .cmp-line span { font-size: 0.7rem; }
+.dash-employer .cmp-diff { display: flex; flex-direction: column; text-align: right; line-height: 1.2; font-size: 0.72rem; color: var(--muted); }
+.dash-employer .cmp-diff span { font-size: 0.68rem; }
+.dash-employer .cmp-diff.up strong { color: var(--c-emp); }
+.dash-employer .cmp-diff.down strong { color: var(--c-wn); }
+
+/* Belang-vergelijking: radar + tabel */
+.dash-employer .cmp-radar { display: grid; grid-template-columns: minmax(300px, 430px) 1fr; gap: 1.5rem; align-items: center; margin-bottom: 1.4rem; break-inside: avoid; }
+.dash-employer .cmp-radar-key { display: flex; justify-content: center; gap: 1.4rem; font-size: 0.78rem; color: var(--muted); }
+.dash-employer .cmp-radar-key span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.dash-employer .cmp-radar-key .line { display: inline-block; width: 26px; height: 0; border-top: 3px solid var(--c-emp); }
+.dash-employer .cmp-radar-key .line.wn { border-top: 3px dashed var(--c-wn); }
+.dash-employer .cmp-radar-note { font-size: 0.72rem; color: var(--muted); margin-top: 0.5rem; }
+.dash-employer .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.dash-employer .cmp-table th { text-align: left; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; padding: 0.35rem 0.5rem; border-bottom: 1.5px solid var(--border); }
+.dash-employer .cmp-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid var(--border); }
+.dash-employer .cmp-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+.dash-employer .cmp-table td.up { color: var(--c-emp); font-weight: 600; }
+.dash-employer .cmp-table td.down { color: var(--c-wn); font-weight: 600; }
+.dash-employer .cmp-n { color: var(--muted); font-size: 0.75rem; }
+
+/* Belang-vergelijking: stippenlijn per construct */
+.dash-employer .cmp-callout { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+.dash-employer .cmp-callout .box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 0.8rem 1rem; font-size: 0.82rem; break-inside: avoid; }
+.dash-employer .cmp-callout .box h5 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0.4rem; }
+.dash-employer .cmp-callout .box.wg h5 { color: var(--c-emp); }
+.dash-employer .cmp-callout .box.wn h5 { color: var(--c-wn); }
+.dash-employer .cmp-callout ul { list-style: none; }
+.dash-employer .cmp-callout li span { color: var(--muted); font-size: 0.75rem; }
+.dash-employer .db-key { display: inline-block; width: 11px; height: 11px; border-radius: 50%; }
+.dash-employer .db-key.wg { background: var(--c-emp); }
+.dash-employer .db-key.wn { background: var(--c-wn); }
+.dash-employer .db-row { display: grid; grid-template-columns: 210px 1fr 190px; gap: 0.8rem; align-items: center; padding: 3px 0; break-inside: avoid; }
+.dash-employer .db-track { position: relative; height: 26px; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px); background-size: 25% 100%; border-right: 1px solid var(--border); }
+.dash-employer .db-track::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--border); }
+.dash-employer .db-line { position: absolute; top: 50%; height: 4px; transform: translateY(-50%); border-radius: 2px; z-index: 1; }
+.dash-employer .db-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; }
+.dash-employer .db-dot.wg { width: 17px; height: 17px; background: var(--c-emp); z-index: 2; }
+.dash-employer .db-dot.wn { width: 9px; height: 9px; background: var(--c-wn); box-shadow: 0 0 0 2px #fff; z-index: 3; }
+.dash-employer .db-info { display: flex; flex-direction: column; line-height: 1.2; font-size: 0.75rem; color: var(--muted); }
+.dash-employer .db-info span { font-size: 0.68rem; }
+.dash-employer .db-info.up strong { color: var(--c-emp); }
+.dash-employer .db-info.down strong { color: var(--c-wn); }
+.dash-employer .db-row.flag { background: rgba(42, 107, 61, 0.05); border-radius: 6px; }
+.dash-employer .db-axis { padding: 0; }
+.dash-employer .db-axis .db-track { height: 16px; background: none; border-right: none; }
+.dash-employer .db-axis .db-track::before { display: none; }
+.dash-employer .db-tick { position: absolute; transform: translateX(-50%); font-size: 0.68rem; color: var(--muted); }
+
+/* Sectie 5: context */
+.dash-employer .context-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+.dash-employer .context-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 1.1rem; break-inside: avoid; }
+.dash-employer .context-card h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0.75rem; }
+.dash-employer .context-item { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem; font-size: 0.8rem; }
+.dash-employer .context-bar { flex: 1; height: 8px; background: var(--track); border-radius: 2px; overflow: hidden; }
+.dash-employer .context-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+.dash-employer .context-val { font-size: 0.75rem; color: var(--muted); width: 20px; text-align: right; }
+.dash-employer .context-name { width: 160px; min-width: 120px; }
+
+@media (max-width: 800px) {
+  .dash-employer .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+  .dash-employer .context-grid { grid-template-columns: 1fr; }
+  .dash-employer .cmp-row, .dash-employer .db-row { grid-template-columns: 1fr; }
+  .dash-employer .cmp-callout { grid-template-columns: 1fr; }
+  .dash-employer .cmp-radar { grid-template-columns: 1fr; }
+  .dash-employer .header { padding: 1.5rem; }
+}
